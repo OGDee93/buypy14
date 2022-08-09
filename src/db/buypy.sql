@@ -57,7 +57,7 @@ END//
 DROP TABLE IF EXISTS 'Order'
 //
 CREATE TABLE 'Order'(
-    id INT PRIMARY KEY AUTO_INCRMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     date_time DATETIME NOT NULL DEFAULT (NOW()),
     delivery_method ENUM('regular', 'urgent') DEFAULT 'regular',
     status ENUM('open', 'processing', 'closed', 'cancelled')
@@ -71,8 +71,41 @@ CREATE TABLE 'Order'(
 )//
 
 
+DROP TABLE IF EXISTS 'Product'
+//
+CREATE TABLE 'Product'(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    quantity INT NOT NULL CHECK('quantity' > 0),
+    price INT NOT NULL CHECK('price' > 0),
+    vat INT NOT NULL CHECK('vat' >= 0 AND < 101),
+    score SMALLINT CHECK('score' > 0 AND <6),
+    active BOOLEAN DEFAULT TRUE,
+    reason VARCHAR(500)
+)//
 
+DROP TABLE IF EXISTS 'Electronic'
+//
+CREATE TABLE 'Electronic'(
+    product_id INT NOT NULL,
+    serial_num BIGINT NOT NULL UNIQUE,
+    brand VARCHAR(20),
+    model VARCHAR(20),
+    spec_tec VARCHAR(500),
+    'type'  VARCHAR(10)
+)//
 
+DROP TABLE IF EXISTS 'Book'
+//
+CREATE TABLE 'Book'(
+    product_id INT NOT NULL,
+    isbn13 VARCHAR(20) NOT NULL UNIQUE,
+    title VARCHAR(50) NOT NULL,
+    genre VARCHAR(50) NOT NULL,
+    publisher VARCHAR(100) NOT NULL,
+    publication_date DATETIME NOT NULL
+
+    FOREIGN KEY productFK(product_id) REFERENCES 'Product'(ID)
+)//
 
 
 
