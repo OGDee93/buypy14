@@ -43,4 +43,3 @@ VALUES
     ('armando', 'almeida', 'arm@xpto.com', '123abC')
 ;
 */
-

@@ -107,6 +107,41 @@ CREATE TABLE 'Book'(
     FOREIGN KEY productFK(product_id) REFERENCES 'Product'(ID)
 )//
 
+DROP TABLE IF EXISTS 'BookAuthor'
+//
+CREATE TABLE 'BookAuthor'(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT NOT NULL,
+    author_id INT NOT NULL
+
+    FOREIGN KEY productFK(product_id) REFERENCES 'Product'(ID)
+    FOREIGN KEY authorFK(author_id) REFERENCES 'Author'(ID)
+)//
+
+DROP TABLE IF EXISTS 'Author'
+//
+CREATE TABLE 'Author'(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    'name' VARCHAR(100),
+    fullname VARCHAR(100),
+    birthdate DATETIME NOT NULL
+)//
+
+DROP TABLE IF EXISTS 'Recomendation'
+//
+CREATE TABLE 'Recomendation'(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT NOT NULL,
+    client_id INT NOT NULL,
+    reason VARCHAR(500),
+    'start_date' DATETIME 
+
+    FOREIGN KEY productFK(product_id) REFERENCES 'Product'(ID)
+    FOREIGN KEY clientFK(cliente_id) REFERENCES 'Client'(ID)
+)//
+
+
+
 
 
 
